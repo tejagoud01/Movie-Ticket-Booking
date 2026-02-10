@@ -1,1 +1,89 @@
+# BookMyMovie - Console Based Python Project
 
+def select_city():
+    print("\nWelcome to BookMyMovie 🎬")
+    print("Select the city where you want to watch the movie:")
+    print("1. City 1")
+    print("2. City 2")
+    print("3. City 3")
+
+    city = int(input("Enter your choice: "))
+    if city in [1, 2, 3]:
+        select_theater()
+    else:
+        print("Invalid choice!")
+        select_city()
+
+
+def select_theater():
+    print("\nSelect the theater:")
+    print("1. INOX")
+    print("2. ICON")
+    print("3. PVR")
+    print("4. Back")
+
+    theater = int(input("Enter your choice: "))
+    if theater in [1, 2, 3]:
+        select_movie()
+    elif theater == 4:
+        select_city()
+    else:
+        print("Invalid choice!")
+        select_theater()
+
+
+def select_movie():
+    print("\nSelect the movie:")
+    print("1. Movie 1")
+    print("2. Movie 2")
+    print("3. Movie 3")
+    print("4. Back")
+
+    movie = int(input("Enter your choice: "))
+    if movie in [1, 2, 3]:
+        select_screen()
+    elif movie == 4:
+        select_theater()
+    else:
+        print("Invalid choice!")
+        select_movie()
+
+
+def select_screen():
+    print("\nSelect screen:")
+    print("1. Screen 1")
+    print("2. Screen 2")
+    print("3. Screen 3")
+
+    screen = int(input("Enter your choice: "))
+    tickets = int(input("Number of tickets: "))
+
+    select_time(screen, tickets)
+
+
+def select_time(screen, tickets):
+    timings = {
+        1: {"1": "10:15 - 1:15", "2": "1:25 - 4:25", "3": "4:35 - 7:35", "4": "7:45 - 10:45"},
+        2: {"1": "10:00 - 1:00", "2": "1:10 - 4:10", "3": "4:20 - 7:20", "4": "7:30 - 10:30"},
+        3: {"1": "9:45 - 12:45", "2": "12:55 - 3:55", "3": "4:05 - 7:05", "4": "7:15 - 10:15"}
+    }
+
+    print("\nAvailable show timings:")
+    for key, value in timings[screen].items():
+        print(f"{key}. {value}")
+
+    choice = input("Select show time: ")
+
+    if choice in timings[screen]:
+        print("\n🎉 Booking Successful!")
+        print(f"Screen: {screen}")
+        print(f"Show Time: {timings[screen][choice]}")
+        print(f"Tickets Booked: {tickets}")
+        print("Enjoy your movie 🍿")
+    else:
+        print("Invalid timing selection!")
+        select_time(screen, tickets)
+
+
+# Program starts here
+select_city()
